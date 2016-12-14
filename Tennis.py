@@ -28,19 +28,31 @@ class ORDI():
                                 joueur.score = 0
                                 self.jeux = self.jeux + 1
                                 self.gainJeu(joueur)
+        
     def gainJeu(self,joueur):
         if self.jeux >= 6 and joueur.jeux <= self.jeux - 2:
             self.sets = self.sets + 1
-            self.gainSet()
+            self.jeux, joueur.jeux = 0, 0
+            self.gainSet(joueur)
         else:
             if self.jeux == joueur.jeux and self.jeux == 6:
-                joueur.TieBreak                                    
+                self.jeux, joueur.jeux = 0, 0
+                joueur.tieBreak()
+        print(joueur.jeux,self.jeux)
+
+    def gainSet(self,joueur):
+        if self.sets  == 2:
+            self.score, joueur.score = 0, 0
+            self.jeux, joueur.jeux = 0, 0
+            self.sets, joueur.sets = 0, 0
+            self.etatVictoire = 1
+            
     def finpartie(self):
         self.score = 0
         self.jeux = 0
         self.sets = 0
 
-class joueur():
+class JOUEURIA():
 
     def __init__(self):
         self.score = 0
@@ -56,6 +68,13 @@ class joueur():
                 ordi.gainPoint(self)
             else:
                 self.gainPoint()
+        if self.etatVictoire == 1:
+            self.etatVictoire = 0
+            self.victoires = self.victoires + 1
+        else:
+            if ordi.etatVictoire == 1:
+                ordi.etatVictoire = 0
+
             
     def gainPoint(self):
         if self.score == 0:
@@ -77,7 +96,8 @@ class joueur():
                                 self.score = 0
                                 ordi.score = 0
                                 self.jeux = self.jeux + 1
-                                self.gainJeu
+                                self.gainJeu()
+        
 
     def gainJeu(self):
         if self.jeux >= 6 and ordi.jeux <= self.jeux - 2:
@@ -87,8 +107,9 @@ class joueur():
             self.gainSet()
         else:
             if self.jeux == ordi.jeux and self.jeux == 6:
-                self.TieBreak
-
+                self.jeux, ordi.jeux = 0, 0
+                self.tieBreak()
+        print(self.jeux,ordi.jeux)
     def tieBreak(self):
         while self.score  < 7 and ordi.score < 7:
             balle = randint(0,1)
@@ -102,18 +123,23 @@ class joueur():
             self.gainSet()
                                 
     def gainSet(self):
-        if self.sets  < 2 and self.sets  < 2:
-            a
+        if self.sets  == 2:
+            self.score, ordi.score = 0, 0
+            self.jeux, ordi.jeux = 0, 0
+            self.sets, ordi.sets = 0, 0
+            self.etatVictoire = 1
 
-        
-    def victoire(self):
-        a
         
 def genJoueurs(nombreJoueurs):
     Joueur = [0] * nombreJoueurs
     for i in range (nombreJoueurs):        
         Joueur[i] = ["Joueur{0}".format(i)]
+    return Joueur
 def Lancement():
-    a
+    for i in range(100):
+        for i in range(len(listeJoueurs)):
+            joueurEnCours = listeJoueurs[i]
+            joueurEnCours.affronte()
+            listeJoueurs[i] = joueurEnCours
         
     
