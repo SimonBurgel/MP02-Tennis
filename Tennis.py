@@ -28,7 +28,6 @@ class ORDI():
                                 joueur.score = 0
                                 self.jeux = self.jeux + 1
                                 self.gainJeu(joueur)
-        
     def gainJeu(self,joueur):
         if self.jeux >= 6 and joueur.jeux <= self.jeux - 2:
             self.sets = self.sets + 1
@@ -47,7 +46,6 @@ class ORDI():
             self.jeux, joueur.jeux = 0, 0
             self.sets, joueur.sets = 0, 0
             self.etatVictoire = 1
-        print ( "l'ordinateur gagne un set contre",joueur.nom)
             
     def finpartie(self):
         self.score = 0
@@ -100,7 +98,6 @@ class JOUEURIA():
                                 ordi.score = 0
                                 self.jeux = self.jeux + 1
                                 self.gainJeu()
-        
 
     def gainJeu(self):
         if self.jeux >= 6 and ordi.jeux <= self.jeux - 2:
@@ -123,8 +120,12 @@ class JOUEURIA():
             else:
                 ordi.score = ordi.score + 1
         if ordi.score == 7:
+            ordi.score = 0
+            self.score = 0
             ordi.gainSet(self)
         if self.score == 7:
+            ordi.score = 0
+            self.score = 0
             self.gainSet()
                                 
     def gainSet(self):
@@ -133,7 +134,6 @@ class JOUEURIA():
             self.jeux, ordi.jeux = 0, 0
             self.sets, ordi.sets = 0, 0
             self.etatVictoire = 1
-        print (self.nom,"gagne un set contre l'ordinateur")
         
 def genJoueurs(nombreJoueurs):
     Joueur = []
@@ -142,11 +142,11 @@ def genJoueurs(nombreJoueurs):
         Joueur[i] = JOUEURIA()
     return Joueur
 def Lancement():
-    #for i in range(1):
-    for i in range(len(listeJoueurs)):            
-        joueurEnCours = listeJoueurs[i]
-        joueurEnCours.affronte()
-        listeJoueurs[i] = joueurEnCours
+    for i in range(100):
+        for i in range(len(listeJoueurs)):            
+            joueurEnCours = listeJoueurs[i]
+            joueurEnCours.affronte()
+            listeJoueurs[i] = joueurEnCours
 ordi = ORDI()
         
     
