@@ -1,13 +1,13 @@
 from random import randint
 class ORDI():
 
-    def __init__(self):
+    def __init__(self):  #Définir les scores du début d'une partie de Tennis
         self.score = 0
         self.jeux = 0
         self.sets = 0
         self.etatVictoire = 0
 
-    def gainPoint(self,joueur):
+    def gainPoint(self,joueur):  #Définir le gain des points lors d'un match. Le comptage des points au Tennis est très particulier.
         if self.score == 0:
             self.score = 15
         else:
