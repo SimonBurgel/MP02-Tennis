@@ -38,14 +38,16 @@ class ORDI():
             if self.jeux == joueur.jeux and self.jeux == 6:
                 self.jeux, joueur.jeux = 0, 0
                 joueur.tieBreak()
-        print(joueur.jeux,self.jeux)
-
+            else:
+                if self.jeux >= 25:
+                    self.gainSet(joueur)
     def gainSet(self,joueur):
         if self.sets  == 2:
             self.score, joueur.score = 0, 0
             self.jeux, joueur.jeux = 0, 0
             self.sets, joueur.sets = 0, 0
             self.etatVictoire = 1
+        print ( "l'ordinateur gagne un set contre",joueur.nom)
             
     def finpartie(self):
         self.score = 0
@@ -60,6 +62,7 @@ class JOUEURIA():
         self.sets = 0
         self.victoires = 0
         self.etatVictoire = 0
+        self.nom = self
 
     def affronte(self):
         while self.etatVictoire == 0 and ordi.etatVictoire == 0:
@@ -109,7 +112,9 @@ class JOUEURIA():
             if self.jeux == ordi.jeux and self.jeux == 6:
                 self.jeux, ordi.jeux = 0, 0
                 self.tieBreak()
-        print(self.jeux,ordi.jeux)
+            else:
+                if self.jeux >= 25:
+                    self.gainSet()
     def tieBreak(self):
         while self.score  < 7 and ordi.score < 7:
             balle = randint(0,1)
@@ -118,7 +123,7 @@ class JOUEURIA():
             else:
                 ordi.score = ordi.score + 1
         if ordi.score == 7:
-            ordi.gainSet()
+            ordi.gainSet(self)
         if self.score == 7:
             self.gainSet()
                                 
@@ -128,18 +133,20 @@ class JOUEURIA():
             self.jeux, ordi.jeux = 0, 0
             self.sets, ordi.sets = 0, 0
             self.etatVictoire = 1
-
+        print (self.nom,"gagne un set contre l'ordinateur")
         
 def genJoueurs(nombreJoueurs):
-    Joueur = [0] * nombreJoueurs
+    Joueur = []
     for i in range (nombreJoueurs):        
-        Joueur[i] = ["Joueur{0}".format(i)]
+        Joueur.append("Joueur{0}".format(i))
+        Joueur[i] = JOUEURIA()
     return Joueur
 def Lancement():
-    for i in range(100):
-        for i in range(len(listeJoueurs)):
-            joueurEnCours = listeJoueurs[i]
-            joueurEnCours.affronte()
-            listeJoueurs[i] = joueurEnCours
+    #for i in range(1):
+    for i in range(len(listeJoueurs)):            
+        joueurEnCours = listeJoueurs[i]
+        joueurEnCours.affronte()
+        listeJoueurs[i] = joueurEnCours
+ordi = ORDI()
         
     
