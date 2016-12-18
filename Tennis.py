@@ -1,32 +1,33 @@
 from random import randint
 class ORDI():
 
-    def __init__(self):
+    def __init__(self): #Définir un classe incluant les score d'une partie de Tennis. Le système de point utilisé est le même qui celui d'un match de Tennis classique
         self.score = 0
         self.jeux = 0
         self.sets = 0
         self.etatVictoire = 0
 
-    def gainPoint(self,joueur):
+    def gainPoint(self,joueur): # Mise en place du système de point. Au Tennis, les points ne se compte pas de 1 en 1. Voir explications des règles plus haut.
         if self.score == 0:
-            self.score = 15
+            self.score = 15 #Le joueur ne gagne pas 1, mais 15 points lorsqu'il marque un premier point.
         else:
             if self.score == 15:
-                self.score = 30
+                self.score = 30 #Son score est de 30 s'il en gagne un deuxième...
+                
             else:
                 if self.score == 30:
-                    self.score = 40
+                    self.score = 40 #...de 40 s'il en marque un 3ème
                 else:
-                    if self.score == 40 and joueur.score == 40:
+                    if self.score == 40 and joueur.score == 40: #Lorsqu'il y a 40A, il faut gagner l'avantage puis un autre point pour gagner le jeu
                         self.score = 50
                     else:
-                        if self.score == 40 and joueur.score == 50:
+                        if self.score == 40 and joueur.score == 50: #
                             joueur.score = 40
                         else:
                             if self.score == 40 or self.score == 50:
                                 self.score = 0
                                 joueur.score = 0
-                                self.jeux = self.jeux + 1
+                                self.jeux = self.jeux + 1 #Un jeu de plus pour le joueur qui remporte les points nécessaires au gain d'un jeu
                                 self.gainJeu(joueur)
     def gainJeu(self,joueur):
         if self.jeux >= 6 and joueur.jeux <= self.jeux - 2:
